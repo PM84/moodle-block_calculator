@@ -173,14 +173,45 @@ define([
     parenthesis: [],
   };
 
+  /**
+   * Separators
+   * Characters used in the display. The memory always uses '.' as decimal separator.
+   */
+  var separators = {
+    decimal: '.',
+    thousands: '',
+  };
+
   var base_calculator = {
     /**
      * init
      * Initialize the Calculator
      */
-    init: function() {
+    init: function(config = {}) {
+      separators.decimal = config.decimalseparator || '.';
+      separators.thousands = config.thousandsseparator || '';
+
       // Register the plugin Javascript Events.
       this.registerEvents();
+    },
+
+    /**
+     * formatForDisplay
+     * Replace the decimal point by the configured decimal separator and group the integer digits.
+     *
+     * @param {string} str Text from the memory, e.g. '1234.5+6'.
+     * @return {string}
+     */
+    formatForDisplay: function(str) {
+      return str.toString().replace(/(\d+)(\.\d*)?|\.\d+/g, (match, integer, fraction) => {
+        if (integer === undefined) {
+          return separators.decimal + match.slice(1);
+        }
+        if (separators.thousands !== '') {
+          integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, separators.thousands);
+        }
+        return fraction === undefined ? integer : integer + separators.decimal + fraction.slice(1);
+      });
     },
 
     /**
@@ -1159,7 +1190,7 @@ define([
       operation = operation === null ? memory.operation : operation;
 
       // Set the current Operand text to the currentOperrand Value.
-      $(SELECTORS.CURRENTOPERAND).textContent = currentOperand.valueOf();
+      $(SELECTORS.CURRENTOPERAND).textContent = base_calculator.formatForDisplay(currentOperand.valueOf());
 
       // Set Parenthesis checker Text.
       $(SELECTORS.OPENPARENTHESISCOUNT).textContent = memory.parenthesis.length != 0 ? memory.parenthesis.length : "";
@@ -1167,11 +1198,11 @@ define([
       // When there is a operation given set the previous Operand Text with the operation after.
       if (operation !== null) {
 
-        $(SELECTORS.PREVIOUSOPERAND).textContent = previousOperand + operation;
+        $(SELECTORS.PREVIOUSOPERAND).textContent = base_calculator.formatForDisplay(previousOperand + operation);
       } else {
 
         // Otherwise set the text to be empty.
-        $(SELECTORS.PREVIOUSOPERAND).textContent = previousOperand;
+        $(SELECTORS.PREVIOUSOPERAND).textContent = base_calculator.formatForDisplay(previousOperand);
       }
     }
   };
