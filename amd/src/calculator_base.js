@@ -68,6 +68,7 @@ define([
     EQUALS: '.data-block-calculator-equals',
     DELETE: '.data-block-calculator-delete',
     AC: '.data-block-calculator-all-clear',
+    COPYVALUE: '#data-block-calculator-copy-value',
     OPENPARENTHESISCOUNT: '#data-block-parenthesis-open-count',
     CLOSEPARENTHESISCOUNT: '#data-block-parenthesis-close-count',
     POPOUT: '.button-block-calculator-popout',
@@ -1188,6 +1189,13 @@ define([
       currentOperand = currentOperand === null ? memory.currentOperand : currentOperand;
       previousOperand = previousOperand === null ? memory.previousOperand : previousOperand;
       operation = operation === null ? memory.operation : operation;
+
+      // Keep the value for the copy button (core/copy_to_clipboard) in sync.
+      var copyValue = $(SELECTORS.COPYVALUE);
+      if (copyValue instanceof HTMLInputElement) {
+        // Use the configured decimal separator, but no thousands separator, so the value can be pasted into input fields.
+        copyValue.value = currentOperand.valueOf().toString().replace(/\./g, separators.decimal);
+      }
 
       // Set the current Operand text to the currentOperrand Value.
       $(SELECTORS.CURRENTOPERAND).textContent = base_calculator.formatForDisplay(currentOperand.valueOf());

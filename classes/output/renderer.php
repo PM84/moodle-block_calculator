@@ -40,7 +40,9 @@ class renderer extends \core\output\plugin_renderer_base {
     public function render_calculator() {
         $separators = self::get_separators();
         $this->page->requires->js_call_amd('block_calculator/calculator_base', 'init', [$separators]);
-        return parent::render_from_template('block_calculator/calculator', $separators);
+        return parent::render_from_template('block_calculator/calculator', $separators + [
+            'showcopybutton' => (bool)get_config('block_calculator', 'showcopybutton'),
+        ]);
     }
 
     /**

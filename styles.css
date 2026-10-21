@@ -22,7 +22,8 @@
 
 .data-block-calculator-number,
 .data-block-calculator-operation,
-.data-block-calculator-delete {
+.data-block-calculator-delete,
+.data-block-calculator-copy {
     color: black !important;  /* stylelint-disable-line declaration-no-important */
     box-shadow:
         rgba(0, 0, 0, 0.4) 0 2px 4px,

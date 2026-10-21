@@ -25,6 +25,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
+    $settings->add(new admin_setting_configcheckbox(
+        'block_calculator/showcopybutton',
+        get_string('showcopybutton', 'block_calculator'),
+        get_string('showcopybutton_desc', 'block_calculator'),
+        0
+    ));
+
     $settings->add(new admin_setting_configselect(
         'block_calculator/decimalseparator',
         get_string('decimalseparator', 'block_calculator'),
