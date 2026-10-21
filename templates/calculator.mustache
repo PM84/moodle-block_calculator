@@ -32,14 +32,14 @@
         * data-char
 
         Context variables required for this template:
-        * none
+        * decimalseparator - Label of the decimal key.
 
         Optional context variables for this template:
         * none
 
     Example context (json):
     {
-
+        "decimalseparator": ","
     }
 }}
 <div class="d-flex justify-content-center align-items-center">
@@ -117,7 +117,7 @@
             <button class="data-block-calculator-number col bg-light fw-bold p-3 border" data-char="0"
                 id="data-block-0">0</button>
             <button class="data-block-calculator-number col bg-light fw-bold p-3 border" data-char="."
-                id="data-block-decimal">.</button>
+                id="data-block-decimal">{{decimalseparator}}</button>
             <button
                 class="data-block-calculator-equals col bg-primary fw-bold calculator-rounded-bottom-right p-3 border"
                 data-char="=" id="data-block-equals">=</button>
