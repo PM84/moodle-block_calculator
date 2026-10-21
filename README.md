@@ -22,6 +22,12 @@ Backwards      --> Delete
 ESC            --> Delete all
 ```
 
+## Settings ##
+
+_Site administration > Plugins > Blocks > Calculator_:
+
+* **Show copy button** – show a button next to DEL that copies the current value, e.g. the result, to the clipboard (default: off).
+
 ## Installing via uploaded ZIP file ##
 
 1. Log in to your Moodle site as an admin and go to _Site administration >

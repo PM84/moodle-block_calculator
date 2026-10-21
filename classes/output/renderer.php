@@ -39,6 +39,8 @@ class renderer extends \core\output\plugin_renderer_base {
      */
     public function render_calculator() {
         $this->page->requires->js_call_amd('block_calculator/calculator_base', 'init', []);
-        return parent::render_from_template('block_calculator/calculator', []);
+        return parent::render_from_template('block_calculator/calculator', [
+            'showcopybutton' => (bool)get_config('block_calculator', 'showcopybutton'),
+        ]);
     }
 }

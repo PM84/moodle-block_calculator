@@ -46,6 +46,9 @@ Then you can drag the Calculator with your mouse by holding the left mouse butto
 To drop the calculator back, press the close button on the top of the calculator.</p>";
 $string['calculator_popout_description_title'] = 'Instructions:';
 $string['calculator_reset_button'] = 'Reset Calculator Position';
+$string['copyresult'] = 'Copy result';
 $string['invalidinput'] = 'Invalid input';
 $string['pluginname'] = 'Calculator';
 $string['privacy:metadata'] = 'The Calculator block saves no data.';
+$string['showcopybutton'] = 'Show copy button';
+$string['showcopybutton_desc'] = 'Show a button next to DEL that copies the current value of the display, e.g. the result, to the clipboard.';
